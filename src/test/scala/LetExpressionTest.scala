@@ -1,5 +1,5 @@
 import com.mhs.ast.{IntValue, LetExpression, Reference, SumExpression}
-import org.scalatest.{FlatSpec, Matchers}[]
+import org.scalatest.{FlatSpec, Matchers}
 
 class LetExpressionTest extends FlatSpec with Matchers {
   "a let expression x = 3 in x + 1" should "return value 4" in {
@@ -15,9 +15,20 @@ class LetExpressionTest extends FlatSpec with Matchers {
     val refX = new Reference("x")
 
     val letOne = new LetExpression("y", value5, new SumExpression(refX, refY))
-    val let = new LetExpression("x", value3, letOne)
+    val letSec = new LetExpression("x", value3, letOne)
 
-    let.evaluate.asInstanceOf[IntValue]
+    letSec.evaluate().asInstanceOf[IntValue].value should be (8)
+  }
+
+  "a let expression x = 3 in (let x = 5 in x + 1) + x" should "return a value 9" in {
+    val value1 = new IntValue(1)
+    val value3 = new IntValue(3)
+    val value5 = new IntValue(5)
+    val refY = new Reference("y")
+    val refX = new Reference("x")
+
+    val letOne = new LetExpression("x", value5, new SumExpression(refX, value1))
+    val letSec = new LetExpression("x", value3, new SumExpression(letOne, refX))
   }
 
 }
