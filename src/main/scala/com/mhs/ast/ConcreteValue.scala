@@ -1,15 +1,18 @@
 package com.mhs.ast
 
-/**
-  * Abstract class was chosen so it cannot be instanciated
-  *
-  * @param value
-  * @tparam T
-  */
+import com.mhs.visitors.MHSVisitor
+
 abstract class ConcreteValue[T](val value : T) extends Value {
   override def evaluate() : Value = this
 }
 
-class IntValue(value: Int) extends ConcreteValue[Int](value)
+case class IntValue(v: Int) extends ConcreteValue[Int](v) {
+  override def verifyType(): Type = IntT
+  override def accept[T](visitor: MHSVisitor[T]) : T = visitor.visit(this)
+}
 
-class BooleanValue(value : Boolean) extends ConcreteValue[Boolean](value)
+case class BooleanValue(v : Boolean) extends ConcreteValue[Boolean](v) {
+  override def verifyType(): Type = BooleanT
+  override def accept[T](visitor: MHSVisitor[T]) : T = visitor.visit(this)
+
+}
