@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import org.scalatest.{Assertions, FlatSpec, Matchers}
 import com.mhs.ast._
 import com.mhs.memory.FuncEnv
 
 class ApplicationTest extends FlatSpec with Matchers {
 
+=======
+import org.scalatest.{FlatSpec, Matchers, Assertions}
+import com.mhs.ast.{Application, FuncDec, IntValue, Reference, SumExpression}
+import com.mhs.memory.FuncEnv
+/**
+  */
+class ApplicationTest extends FlatSpec with Matchers {
+>>>>>>> newBranch
   "a application inc 4 (where inc x = x + 1)" should "take to value 5" in {
     val inc = new FuncDec("inc", List("x"), new SumExpression(new Reference("x"), new IntValue(1)))
     val app = new Application("inc", new IntValue(4))
@@ -23,6 +32,7 @@ class ApplicationTest extends FlatSpec with Matchers {
     sum.evaluate().asInstanceOf[IntValue].value should be (9)
   }
 
+<<<<<<< HEAD
   //TODO: dinamic scope
   "supondo (def f y = x + y), e avaliamos let x = 10 in f 5 " should " levar ao 15" in {
     val refX = new Reference("x")
@@ -34,6 +44,8 @@ class ApplicationTest extends FlatSpec with Matchers {
     let.evaluate().asInstanceOf[IntValue].value should be (15)
   }
 
+=======
+>>>>>>> newBranch
   "application dumbSum 5 (where dumbSum x = x + y)" should "raise error" in {
     val dumbSum = new FuncDec("dumbSum", List("x"), new SumExpression(new Reference("x"), new Reference("y")))
     val appOne = new Application("dumbSum", new IntValue(5))
@@ -60,10 +72,17 @@ class ApplicationTest extends FlatSpec with Matchers {
 
     val mult = new FuncDec("mult", List("x"), new SumExpression(refX, refX))
     FuncEnv.associate("mult", mult)
+<<<<<<< HEAD
     val appMult = new Application("mult", appIncOne.evaluate())
     appMult.evaluate().asInstanceOf[IntValue].value should be (10)
 
     val appIncTwo = new Application("inc", appMult.evaluate())
+=======
+    val appMult = new Application("mult", appIncOne)
+    appMult.evaluate().asInstanceOf[IntValue].value should be (10)
+
+    val appIncTwo = new Application("inc", appMult)
+>>>>>>> newBranch
 
     appIncTwo.evaluate().asInstanceOf[IntValue].value should be (11)
   }
