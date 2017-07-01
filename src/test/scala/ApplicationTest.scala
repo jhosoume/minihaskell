@@ -67,5 +67,4 @@ class ApplicationTest extends FlatSpec with Matchers {
 
     appIncTwo.evaluate().asInstanceOf[IntValue].value should be (11)
   }
-
 }
