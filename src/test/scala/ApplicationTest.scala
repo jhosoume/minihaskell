@@ -68,4 +68,13 @@ class ApplicationTest extends FlatSpec with Matchers {
     appIncTwo.evaluate().asInstanceOf[IntValue].value should be (11)
   }
 
+  "application sqr x (where x = 10)" should "return 100" in {
+    val refX = new Reference("x")
+    val sqr = new FuncDec("sqr", List("x"), new LambdaExpression("x", new MultExpression(refX,refX)))
+    FuncEnv.associate("sqr", sqr)
+    val appSqr = new Application("sqr", IntValue(10))
+
+    appSqr.evaluate().asInstanceOf[IntValue].value should be (100)
+  }
+
 }

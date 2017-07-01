@@ -12,7 +12,7 @@ class Application(val name: String, val args: Expression*) extends Expression {
     function.body.evaluate()
   }
 
-  override def verifyType() : Type = ErrorT
+  override def verifyType() : Type = FunctionT
 
   override def accept[T](visitor: MHSVisitor[T]): T = visitor.visit(this)
 

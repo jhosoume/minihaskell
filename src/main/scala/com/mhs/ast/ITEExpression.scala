@@ -2,9 +2,6 @@ package com.mhs.ast
 
 import com.mhs.visitors.MHSVisitor
 
-/**
-  * Created by luisa on 01/07/2017.
-  */
 class ITEExpression(val condition: Expression, val thenClause: Expression, val elseClause: Expression) extends Expression{
   override def evaluate(): Value =
     if (condition.evaluate().asInstanceOf[BooleanValue].value)
