@@ -1,4 +1,3 @@
-import com.mhs.ast
 import com.mhs.ast._
 import com.mhs.memory.FuncEnv
 import org.scalatest.{FlatSpec, Matchers}
@@ -26,8 +25,6 @@ class TypeTest extends FlatSpec with Matchers {
   "ITEExpression type" should "BooleanT" in {
     val let = new LetExpression("x", IntValue(2), new Reference("x"))
     val ite = new ITEExpression(new EqualsExpression(let, IntValue(2)), BooleanValue(true), BooleanValue(false))
-
-    println(let.verifyType())
 
     ite.evaluate().verifyType() should be (BooleanT)
   }

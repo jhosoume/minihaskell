@@ -37,4 +37,10 @@ class LetExpressionTest extends FlatSpec with Matchers {
     let.evaluate().asInstanceOf[IntValue].value should be (10)
   }
 
+  "let x=2 in x" should "return 2" in {
+    val let = new LetExpression("x", IntValue(2), new Reference("x"))
+    println(let.evaluate())
+    let.evaluate().asInstanceOf[IntValue].value should be (2)
+  }
+
 }
