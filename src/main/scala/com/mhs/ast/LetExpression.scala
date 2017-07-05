@@ -13,7 +13,7 @@ class LetExpression(val id: String, val namedExp: Expression, val body: Expressi
 
   override def evaluate: Value = {
     ExpressionEnv.associate(id, namedExp)
-    return body.evaluate()
+    body.evaluate()
   }
 
   override def verifyType(): Type =

@@ -7,7 +7,7 @@ class Application(val name: String, val args: Expression*) extends Expression {
   override def evaluate(): Value = {
     val function = FuncEnv.search(name)
     for (indx <- 0 until function.args.size) {
-      ExpressionEnv.associate(function.args(indx), args(indx))
+      ExpressionEnv.associate(function.args(indx)._1, args(indx))
     }
     function.body.evaluate()
   }
