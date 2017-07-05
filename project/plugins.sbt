@@ -1,2 +1,1 @@
-sbt.version = 0.13.15
 addSbtPlugin ("org.bitbucket.inkytonik.sbt-rats" % "sbt-rats" % "2.3.0")

@@ -49,9 +49,7 @@ class CheckType extends MHSVisitor[Type]{
   def visit(e: LambdaExpression)  = FunctionT
 
   def visit(e: Reference)         = {
-    println("Aqui")
     val exp = ExpressionEnv.search(e.id)
-    println("Aqui2")
     if(exp!= null)
       exp.accept(this)
     else
