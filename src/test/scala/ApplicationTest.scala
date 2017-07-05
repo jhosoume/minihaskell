@@ -10,7 +10,7 @@ class ApplicationTest extends FlatSpec with Matchers {
       * >> inc 4
       * >> 5
       */
-    val inc = new FuncDec("inc", IntT, List(("x",IntT)), new SumExpression(new Reference("x"), new IntValue(1)))
+    val inc = new FuncDec("inc", List(("x",IntT)), IntT, new SumExpression(new Reference("x"), new IntValue(1)))
     val app = new Application("inc", new IntValue(4))
 
     FuncEnv.associate("inc", inc)
@@ -20,7 +20,7 @@ class ApplicationTest extends FlatSpec with Matchers {
 
   "application inc x (where x = 4) summed with its own return value ((inc x) + x)" should "return 9" in {
     val refX = new Reference("x")
-    val inc = new FuncDec("inc", IntT, List(("x",IntT)), new SumExpression(refX, new IntValue(1)))
+    val inc = new FuncDec("inc", List(("x",IntT)), IntT, new SumExpression(refX, new IntValue(1)))
     val app = new Application("inc", new IntValue(4))
     FuncEnv.associate("inc", inc)
     val sum = new SumExpression(app, refX)
@@ -31,7 +31,7 @@ class ApplicationTest extends FlatSpec with Matchers {
   //TODO: dinamic scope
   "supondo (def f y = x + y), e avaliamos let x = 10 in f 5 " should " levar ao 15" in {
     val refX = new Reference("x")
-    val f    = new FuncDec("f", IntT, List(("y", IntT)), new SumExpression(refX, new Reference("y")))
+    val f    = new FuncDec("f", List(("y", IntT)), IntT, new SumExpression(refX, new Reference("y")))
     val let  = new LetExpression("x", new IntValue(10), new Application("f", new IntValue(5)))
 
     FuncEnv.associate("f", f)
@@ -40,14 +40,14 @@ class ApplicationTest extends FlatSpec with Matchers {
   }
 
   "application dumbSum 5 (where dumbSum x = x + y)" should "raise error" in {
-    val dumbSum = new FuncDec("dumbSum", IntT, List(("x", IntT)), new SumExpression(new Reference("x"), new Reference("y")))
+    val dumbSum = new FuncDec("dumbSum", List(("x", IntT)), IntT, new SumExpression(new Reference("x"), new Reference("y")))
     val appOne = new Application("dumbSum", new IntValue(5))
 
     FuncEnv.associate("dumbSum", dumbSum)
 
     //appOne.evaluate().asInstanceOf[IntValue].value shouldNot compile
 
-    val inc = new FuncDec("inc", IntT, List(("y", IntT)), new SumExpression(new Reference("y"), new IntValue(1)))
+    val inc = new FuncDec("inc", List(("y", IntT)), IntT, new SumExpression(new Reference("y"), new IntValue(1)))
     val appTwo = new Application("inc", new IntValue(4))
 
     FuncEnv.associate("inc", inc)
@@ -58,12 +58,12 @@ class ApplicationTest extends FlatSpec with Matchers {
 
   "application inc double inc 4 (where double x = x + x)" should "return value 11" in {
     val refX = new Reference("x")
-    val inc = new FuncDec("inc", IntT, List(("x", IntT)), new SumExpression(refX, new IntValue(1)))
+    val inc = new FuncDec("inc", List(("x", IntT)), IntT, new SumExpression(refX, new IntValue(1)))
     FuncEnv.associate("inc", inc)
     val appIncOne = new Application("inc", new IntValue(4))
     appIncOne.evaluate().asInstanceOf[IntValue].value should be (5)
 
-    val mult = new FuncDec("mult", IntT, List(("x", IntT)), new SumExpression(refX, refX))
+    val mult = new FuncDec("mult", List(("x", IntT)), IntT, new SumExpression(refX, refX))
     FuncEnv.associate("mult", mult)
     val appMult = new Application("mult", appIncOne.evaluate())
     appMult.evaluate().asInstanceOf[IntValue].value should be (10)
@@ -75,7 +75,7 @@ class ApplicationTest extends FlatSpec with Matchers {
 
   "application sqr x (where x = 10)" should "return 100" in {
     val refX = new Reference("x")
-    val sqr = new FuncDec("sqr", IntT, List(("x", IntT)), new LambdaExpression("x", new MultExpression(refX,refX)))
+    val sqr = new FuncDec("sqr", List(("x", IntT)), IntT, new LambdaExpression(("x", IntT), IntT, new MultExpression(refX,refX)))
     FuncEnv.associate("sqr", sqr)
     val appSqr = new Application("sqr", IntValue(10))
 

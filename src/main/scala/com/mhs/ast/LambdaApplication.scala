@@ -5,7 +5,7 @@ import com.mhs.visitors.MHSVisitor
 
 class LambdaApplication(val lambdaExp: LambdaExpression, val arg: Expression) extends Expression{
   override def evaluate: Value = {
-    ExpressionEnv.associate(lambdaExp.arg, arg)
+    ExpressionEnv.associate(lambdaExp.arg._1, arg)
     lambdaExp.evaluate()
   }
 

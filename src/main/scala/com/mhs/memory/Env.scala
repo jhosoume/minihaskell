@@ -16,7 +16,9 @@ class Env[T] {
     context += id -> exp
   }
 
-  def search(id: String): T = context(id)
+  def search(id: String): T = {
+    context(id)
+  }
 }
 
 object ExpressionEnv extends Env[Expression]

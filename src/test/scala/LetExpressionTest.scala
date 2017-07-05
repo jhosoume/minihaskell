@@ -32,7 +32,7 @@ class LetExpressionTest extends FlatSpec with Matchers {
   }
 
   "let y = 5 in (x->y+y)2" should "10" in {
-    val let = new LetExpression("y", IntValue(5), new LambdaExpression("y", new SumExpression(new Reference("y"),new Reference("y"))))
+    val let = new LetExpression("y", IntValue(5), new LambdaExpression(("y", IntT), IntT, new SumExpression(new Reference("y"),new Reference("y"))))
 
     let.evaluate().asInstanceOf[IntValue].value should be (10)
   }

@@ -10,7 +10,6 @@ import com.mhs.ast._
 trait MHSVisitor[+T]{
   def visit(e: IntValue)          : T
   def visit(e: BooleanValue)      : T
-  def visit(e: FunctionValue)     : T
   def visit(e: SumExpression)     : T
   def visit(e: MultExpression)    : T
   def visit(e: ITEExpression)     : T

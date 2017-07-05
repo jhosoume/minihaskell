@@ -9,7 +9,11 @@ import com.mhs.visitors.MHSVisitor
   * class LambdaExpression (val arg: String, val argType: Type, val body: FunctionValue, val bodyType: Type) extends Expression
   */
 
-class LambdaExpression (val arg: String, val body: Expression) extends Expression{
+/**          >> def inc(x: IntT): IntT = x + 1
+  *          >> \(x: IntT):IntT = x + 1
+  *          */
+
+class LambdaExpression (val arg: (String, Type),val funcType: Type, val body: Expression) extends Expression{
 
   override def evaluate : Value = body.evaluate()
 

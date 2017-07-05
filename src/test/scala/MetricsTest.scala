@@ -12,7 +12,7 @@ class MetricsTest extends FlatSpec with Matchers{
   }
 
   "the total expressions " should "return" in {
-    val lamb = new LambdaExpression("x", new SumExpression(new Reference("x"), IntValue(1)))
+    val lamb = new LambdaExpression(("x", IntT), IntT, new SumExpression(new Reference("x"), IntValue(1)))
 
     val m : Metrics = new Metrics()
     lamb.accept(m) should be (4)

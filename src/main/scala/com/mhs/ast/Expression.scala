@@ -6,9 +6,7 @@ class Type
 
 case object IntT extends Type
 case object BooleanT extends Type
-case object FunctionT extends Type {
-
-}
+case object FunctionT extends Type
 case object ErrorT extends Type
 
 trait Expression {
