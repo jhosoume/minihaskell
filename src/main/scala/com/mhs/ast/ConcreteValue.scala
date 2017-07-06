@@ -15,8 +15,3 @@ case class BooleanValue(v : Boolean) extends ConcreteValue[Boolean](v) {
   override def verifyType(): Type = BooleanT
   override def accept[T](visitor: MHSVisitor[T]) : T = visitor.visit(this)
 }
-
-/**case class FunctionValue(v :Expression) extends ConcreteValue[Expression](v) {
-  override def verifyType(): Type = FunctionT
-  override def accept[T](visitor: MHSVisitor[T]) : T = visitor.visit(this)
-}*/

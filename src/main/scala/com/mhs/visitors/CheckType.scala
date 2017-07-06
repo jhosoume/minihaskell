@@ -12,6 +12,12 @@ class CheckType extends MHSVisitor[Type]{
 
     if(t1.equals(IntT) && t2.equals(IntT)) IntT else ErrorT
   }
+  def visit(e: SubExpression)     = {
+    val t1 = e.lhs.accept(this)
+    val t2 = e.rhs.accept(this)
+
+    if(t1.equals(IntT) && t2.equals(IntT)) IntT else ErrorT
+  }
   def visit(e: MultExpression)    = {
     val t1 = e.lhs.accept(this)
     val t2 = e.rhs.accept(this)

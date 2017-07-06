@@ -11,6 +11,7 @@ trait MHSVisitor[+T]{
   def visit(e: IntValue)          : T
   def visit(e: BooleanValue)      : T
   def visit(e: SumExpression)     : T
+  def visit(e: SubExpression)     : T
   def visit(e: MultExpression)    : T
   def visit(e: ITEExpression)     : T
   def visit(e: Application)       : T
