@@ -10,7 +10,11 @@ import scala.collection.mutable
   * Env to associate identifiers and expressions.
   */
 class Env[T] {
+<<<<<<< HEAD
   private val context: HashMap[String, T] = new mutable.HashMap()
+=======
+  private val context: HashMap[String, T] = new HashMap()
+>>>>>>> lambda_variation
 
   def associate(id: String, exp: T): Unit = {
     context += id -> exp

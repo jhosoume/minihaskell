@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import com.mhs.ast.{IntValue, LetExpression, Reference, SumExpression}
+=======
+import com.mhs.ast._
+>>>>>>> lambda_variation
 import org.scalatest.{FlatSpec, Matchers}
 
 class LetExpressionTest extends FlatSpec with Matchers {
@@ -29,6 +33,21 @@ class LetExpressionTest extends FlatSpec with Matchers {
 
     val letOne = new LetExpression("x", value5, new SumExpression(refX, value1))
     val letSec = new LetExpression("x", value3, new SumExpression(letOne, refX))
+<<<<<<< HEAD
+=======
+  }
+
+  "let y = 5 in (x->y+y)2" should "10" in {
+    val let = new LetExpression("y", IntValue(5), new LambdaExpression(("y", IntT), IntT, new SumExpression(new Reference("y"),new Reference("y"))))
+
+    let.evaluate().asInstanceOf[IntValue].value should be (10)
+  }
+
+  "let x=2 in x" should "return 2" in {
+    val let = new LetExpression("x", IntValue(2), new Reference("x"))
+    println(let.evaluate())
+    let.evaluate().asInstanceOf[IntValue].value should be (2)
+>>>>>>> lambda_variation
   }
 
 }

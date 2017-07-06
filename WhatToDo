@@ -1,0 +1,36 @@
+Exercícios opcionais:
+
+a) Definir a sintaxe concreta da linguagem
+
+exemplos:
+
+def inc(x : int) : int = x + 1 ou
+
+def inc(int x) : int = +(x, 1)
+
+declare inc(arg x : int) : int = { return x + 1; }
+
+b) Implementar um parser usando algum gerador de parser
+
+Exercícios obrigatórios
+
+- incluir definições de tipos nas declarações de funções
+
+- concluir verificação de tipos
+
+- implementar funções de primeira classe (expressões Lambda)
+
+funções são valores da mesma forma que Int/Bool na linguagem
+novo tipo de expressão
+novo tipo de valor (valor função)
+apenas um argumento + corpo (ambos tipados)
+pensar algo como \(x : int) : int -> x + 1
+o exemplo acima possui tipo TFuncao Int -> Int
+requer um novo tipo de expressão que é a aplicação de lambdas
+aplicação de lambdas, recebe como argumento, duas expressões, a primeira, quando avaliada, deve retornar um valor do tipo função; a segunda é o argumento da função.
+Referência: capítulos 5 e 6 de PLAI
+- implementar o refactoring if(cond) then true else false => cond
+
+- Implementar uma transformação de Let x = 5 in x + 1 => (\x -> x+1) 5
+
+- mover a implementação da verificação de tipos para um novo visitor
